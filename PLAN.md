@@ -71,5 +71,33 @@ JPEG within 528×792.
 
 - Archive on finish: read CrossPoint's progress sync and move finished
   documents out of the Shortlist.
-- Highlights made on the device back into Readwise.
 - Inbox as a fourth shelf.
+
+### Highlights back to Readwise – waiting for CrossPoint 2.0 stable
+
+Possible, but blocked on firmware: clipping sync exists only in the 2.0.0rc
+prerelease (2026-10-19); 1.6.5 has no clippings code.
+
+- **Device side** (`src/clippings/ClippingSync.cpp`, 2.0): on a manual
+  CrossPoint Sync with *Sync Clippings* on, each clipping is `PUT` as JSON
+  (id, text, chapter title, timestamp, position) to
+  `<sync server>/api/v1/clippings/<documentHash>`, with the KOSync
+  `x-auth-user`/`x-auth-key` headers. The server must answer a probe with
+  `sync_version: 2` and each upload with `{"accepted": 1}`. One sync server URL
+  serves both progress and clippings.
+- **Readwise side:** Reader API v3 `POST /api/v3/save/` with `parent_id` +
+  `content` creates a highlight on the document, but `content` must match the
+  document text exactly (else 400). Fallback: v2 `POST /api/v2/highlights/`,
+  de-duplicated by title/author/text/source_url.
+- **Design:** this server becomes the device's sync server – it implements the
+  clippings endpoints and proxies KOSync progress to
+  `sync.crosspointreader.com`. EPUBs are byte-deterministic, so the device's
+  binary document hash (KOReader partial MD5) can be computed when a book is
+  served and stored against the Reader document ID in a small KV store – the
+  project's first state. Each uploaded clipping then becomes a Reader v3
+  highlight, falling back to v2 on a text mismatch.
+- **Limits:** manual, one-way (device → Readwise); deletions need a stored
+  clipping → highlight mapping, so left out at first; the protocol is new and
+  may change before 2.0 ships.
+- **Verify** with CrossPoint's host-side `test/clipping_sync` harness, the same
+  way the OPDS and OPF parsers are checked today.
