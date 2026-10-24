@@ -20,6 +20,33 @@ Runs as two serverless functions on Vercel; stores nothing.
 
 PDFs, videos and highlights are left out – CrossPoint can't open them.
 
+## Screenshots
+
+Taken on an Xteink X3 running CrossPoint 1.6.5.
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/1-home.png" alt="CrossPoint home screen showing the cover of a Readwise article and the OPDS Browser menu item">
+      <br><sub><b>Home.</b> The article being read, with the cover built from its Readwise preview image. OPDS Browser opens the catalog.</sub>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/2-opds-servers.png" alt="OPDS Servers list with Readwise and Project Gutenberg">
+      <br><sub><b>OPDS servers.</b> Readwise sits alongside any other catalog, here Project Gutenberg.</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/3-shelves.png" alt="Readwise catalog menu listing Shortlist, Later and Archive">
+      <br><sub><b>Shelves.</b> The catalog root: Shortlist, Later and Archive, one feed each.</sub>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/4-shortlist.png" alt="Shortlist feed listing article titles and authors">
+      <br><sub><b>Shortlist.</b> Articles with their authors, 50 to a page. Download fetches the article as an EPUB.</sub>
+    </td>
+  </tr>
+</table>
+
 ## Deploy
 
 Needs a [Readwise access token](https://readwise.io/access_token) and a Vercel
