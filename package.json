@@ -1,0 +1,27 @@
+{
+  "name": "readwise-opds-xteink",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Readwise Reader as an OPDS catalog for Xteink e-readers running CrossPoint",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chuyeow/readwise-opds-xteink.git"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "typecheck": "node --check api/*.js src/**/*.js test/*.js scripts/*.js",
+    "dev": "node scripts/dev-server.js",
+    "verify:crosspoint": "node scripts/verify-crosspoint.js"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "domhandler": "^6.0.1",
+    "fflate": "^0.8.3",
+    "htmlparser2": "^12.0.0",
+    "sharp": "^0.35.5"
+  }
+}

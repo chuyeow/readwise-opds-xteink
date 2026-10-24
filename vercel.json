@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/opds", "destination": "/api/opds" },
+    { "source": "/opds/books/:file", "destination": "/api/book?file=:file" },
+    { "source": "/opds/:location", "destination": "/api/opds?location=:location" }
+  ],
+  "functions": {
+    "api/book.js": { "maxDuration": 60, "memory": 1024 }
+  }
+}
